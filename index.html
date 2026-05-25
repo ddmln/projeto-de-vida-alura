@@ -40,17 +40,30 @@
   </section>
 
   <script>
-    const botoes = document.querySelectorAll(".botao");
+    const botoes = document.querySelectorAll('.botao');
+    const abas = document.querySelectorAll('.aba-conteudo');
+
+    function mostraAba(index) {
+      for (let k = 0; k < abas.length; k++) {
+        abas[k].style.display = k === index ? 'block' : 'none';
+      }
+    }
 
     for (let i = 0; i < botoes.length; i++) {
-      botoes[i].addEventListener("click", function () {
+      botoes[i].addEventListener('click', function () {
         for (let j = 0; j < botoes.length; j++) {
-          botoes[j].classList.remove("ativo");
+          botoes[j].classList.remove('ativo');
         }
-        botoes[i].classList.add("ativo");
+        botoes[i].classList.add('ativo');
+        mostraAba(i);
       });
     }
+
+    // mostra somente a primeira aba inicialmente
+    mostraAba(0);
   </script>
+
+  <script src="main.js"></script>
 </body>
 
 </html>
