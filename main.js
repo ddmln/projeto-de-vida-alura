@@ -2,9 +2,29 @@ const botoes = document.querySelectorAll('.botao');
 const abas = document.querySelectorAll('.aba-conteudo');
 const contadores = document.querySelectorAll('.aba-conteudo .contador');
 
+function addDays(date, days) {
+  const result = new Date(date);
+  result.setDate(result.getDate() + days);
+  return result;
+}
+
+const hoje = new Date();
+const prazos = [
+  addDays(hoje, 30),
+  addDays(hoje, 60),
+  addDays(hoje, 90),
+  addDays(hoje, 120)
+];
+
 if (botoes.length === 0 || abas.length === 0 || contadores.length === 0) {
   console.warn('Não há abas ou botões suficientes para inicializar o painel.');
 } else {
+  function addDays(date, days) {
+    const result = new Date(date);
+    result.setDate(result.getDate() + days);
+    return result;
+  }
+
   function mostraAba(index) {
     abas.forEach((aba, k) => {
       aba.style.display = k === index ? 'block' : 'none';
@@ -14,20 +34,6 @@ if (botoes.length === 0 || abas.length === 0 || contadores.length === 0) {
       botao.classList.toggle('ativo', k === index);
     });
   }
-
-  function addDays(date, days) {
-    const result = new Date(date);
-    result.setDate(result.getDate() + days);
-    return result;
-  }
-
-  const hoje = new Date();
-  const prazos = [
-    addDays(hoje, 30),
-    addDays(hoje, 60),
-    addDays(hoje, 90),
-    addDays(hoje, 120),
-  ];
 
   function calculaTempo(dataFinal) {
     const agora = Date.now();
@@ -46,8 +52,9 @@ if (botoes.length === 0 || abas.length === 0 || contadores.length === 0) {
   }
 
   function atualizaCronometro() {
-    contadores.forEach((contador, i) => {
-      contador.textContent = calculaTempo(prazos[i]);
+    contadores.forEach((contador, index) => {
+      const texto = calculaTempo(prazos[index]);
+      contador.textContent = texto;
     });
   }
 
