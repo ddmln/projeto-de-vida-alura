@@ -10,58 +10,38 @@
 </head>
 
 <body>
-  <section class="conteudo-principal">
+  <main class="conteudo-principal">
     <h2 class="titulo-principal">Meus Objetivos do ano<span>_</span></h2>
     <div class="botoes">
-      <button class="botao ativo">Comemoração</button>
-      <button class="botao">Não esquecer!</button>
-      <button class="botao">Animação</button>
-      <button class="botao">Muito esperado!</button>
+      <button type="button" class="botao ativo">Comemoração</button>
+      <button type="button" class="botao">Não esquecer!</button>
+      <button type="button" class="botao">Animação</button>
+      <button type="button" class="botao">Muito esperado!</button>
     </div>
-  </section>
+  </main>
 
   <section class="abas-textos">
-    <div class="aba-conteudo">
+    <article class="aba-conteudo">
       <h3 class="aba-conteudo-titulo-principal">Aniversário da Ana</h3>
       <h4 class="aba-conteudo-titulo-secundario">Tempo para completar o objetivo</h4>
-    </div>
-    <div class="aba-conteudo">
+      <div class="contador" aria-live="polite"></div>
+    </article>
+    <article class="aba-conteudo">
       <h3 class="aba-conteudo-titulo-principal">Aniversário da Kamilly</h3>
       <h4 class="aba-conteudo-titulo-secundario">Tempo para completar o objetivo</h4>
-    </div>
-    <div class="aba-conteudo">
+      <div class="contador" aria-live="polite"></div>
+    </article>
+    <article class="aba-conteudo">
       <h3 class="aba-conteudo-titulo-principal">Viagem para Recife</h3>
       <h4 class="aba-conteudo-titulo-secundario">Tempo para completar o objetivo</h4>
-    </div>
-    <div class="aba-conteudo">
+      <div class="contador" aria-live="polite"></div>
+    </article>
+    <article class="aba-conteudo">
       <h3 class="aba-conteudo-titulo-principal">Ir ver minha família em São Paulo</h3>
       <h4 class="aba-conteudo-titulo-secundario">Tempo para completar o objetivo</h4>
-    </div>
+      <div class="contador" aria-live="polite"></div>
+    </article>
   </section>
-
-  <script>
-    const botoes = document.querySelectorAll('.botao');
-    const abas = document.querySelectorAll('.aba-conteudo');
-
-    function mostraAba(index) {
-      for (let k = 0; k < abas.length; k++) {
-        abas[k].style.display = k === index ? 'block' : 'none';
-      }
-    }
-
-    for (let i = 0; i < botoes.length; i++) {
-      botoes[i].addEventListener('click', function () {
-        for (let j = 0; j < botoes.length; j++) {
-          botoes[j].classList.remove('ativo');
-        }
-        botoes[i].classList.add('ativo');
-        mostraAba(i);
-      });
-    }
-
-    // mostra somente a primeira aba inicialmente
-    mostraAba(0);
-  </script>
 
   <script src="main.js"></script>
 </body>

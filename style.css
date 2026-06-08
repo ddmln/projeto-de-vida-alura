@@ -1,9 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400;1,700&family=Chakra+Petch:wght@400;500;600;700&display=swap');
 
 :root {
   --cor-de-fundo: #16500b;
-  --verde: #6FFF57;
-  --branco: #FFFFFF;
+  --verde: #6fff57;
+  --branco: #ffffff;
   --botao-ativo: #082005;
   --botao-inativo: rgba(58, 55, 94, 0.5);
   --texto-fundo: rgba(58, 55, 94, 0.3);
@@ -19,6 +19,18 @@ body {
   background-color: var(--cor-de-fundo);
   color: var(--branco);
   font-family: 'Lora', serif;
+}
+
+button {
+  font: inherit;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+button:focus-visible {
+  outline: 2px solid var(--verde);
+  outline-offset: 3px;
 }
 
 .conteudo-principal {
@@ -66,7 +78,6 @@ body {
   border-left: 2px solid var(--botao-ativo);
   border-right: 2px solid var(--botao-ativo);
   border-top: none;
-  cursor: pointer;
   transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
@@ -111,6 +122,17 @@ body {
   text-align: center;
   color: var(--verde);
   text-transform: uppercase;
+}
+
+.contador {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  color: var(--branco);
+  font-size: 1.1rem;
+  text-align: center;
 }
 
 @media screen and (min-width: 768px) {

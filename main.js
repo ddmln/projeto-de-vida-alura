@@ -1,7 +1,19 @@
-// main.js - cronômetros para cada aba
-(function () {
-  const abas = document.querySelectorAll('.aba-conteudo');
-  if (!abas || abas.length === 0) return;
+const botoes = document.querySelectorAll('.botao');
+const abas = document.querySelectorAll('.aba-conteudo');
+const contadores = document.querySelectorAll('.aba-conteudo .contador');
+
+if (botoes.length === 0 || abas.length === 0 || contadores.length === 0) {
+  console.warn('Não há abas ou botões suficientes para inicializar o painel.');
+} else {
+  function mostraAba(index) {
+    abas.forEach((aba, k) => {
+      aba.style.display = k === index ? 'block' : 'none';
+    });
+
+    botoes.forEach((botao, k) => {
+      botao.classList.toggle('ativo', k === index);
+    });
+  }
 
   function addDays(date, days) {
     const result = new Date(date);
@@ -14,47 +26,36 @@
     addDays(hoje, 30),
     addDays(hoje, 60),
     addDays(hoje, 90),
-    addDays(hoje, 120)
+    addDays(hoje, 120),
   ];
 
-  const contadores = [];
-
-  abas.forEach((aba) => {
-    const info = document.createElement('div');
-    info.className = 'contador';
-    info.style.textAlign = 'center';
-    info.style.marginTop = '8px';
-    info.textContent = '';
-    aba.appendChild(info);
-    contadores.push(info);
-  });
-
   function calculaTempo(dataFinal) {
-    const agoraMs = Date.now();
-    const finalMs = dataFinal.getTime();
-    let diff = finalMs - agoraMs;
-    if (diff <= 0) return 'Prazo Finalizado';
+    const agora = Date.now();
+    const diff = dataFinal.getTime() - agora;
+
+    if (diff <= 0) {
+      return 'Prazo Finalizado';
+    }
 
     const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
-    diff -= dias * 1000 * 60 * 60 * 24;
-    const horas = Math.floor(diff / (1000 * 60 * 60));
-    diff -= horas * 1000 * 60 * 60;
-    const minutos = Math.floor(diff / (1000 * 60));
-    diff -= minutos * 1000 * 60;
-    const segundos = Math.floor(diff / 1000);
+    const horas = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const minutos = Math.floor((diff / (1000 * 60)) % 60);
+    const segundos = Math.floor((diff / 1000) % 60);
 
-    return (
-      dias + ' dias ' + horas + ' horas ' + minutos + ' minutos ' + segundos + ' segundos'
-    );
+    return `${dias} dias ${horas} horas ${minutos} minutos ${segundos} segundos`;
   }
 
   function atualizaCronometro() {
-    for (let i = 0; i < contadores.length; i++) {
-      contadores[i].textContent = calculaTempo(prazos[i]);
-    }
+    contadores.forEach((contador, i) => {
+      contador.textContent = calculaTempo(prazos[i]);
+    });
   }
 
-  // inicia e atualiza a cada segundo
+  botoes.forEach((botao, index) => {
+    botao.addEventListener('click', () => mostraAba(index));
+  });
+
+  mostraAba(0);
   atualizaCronometro();
   setInterval(atualizaCronometro, 1000);
-})();
+}
